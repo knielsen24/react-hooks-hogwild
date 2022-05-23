@@ -5,13 +5,27 @@ import HogContainer from "./HogContainer";
 
 const Nav = ({ hogs }) => {
 	const [isCheck, setIsCheck] = useState(false)
-	const [sortFilter, setSortFilter] = useState("default")
+	const [sortFilter, setSortFilter] = useState("name")
 
 	const handleCheckBox = () => setIsCheck(!isCheck)
-
+	
 	const handleSort = (e) => {
-		console.log(e.target.value)
+		setSortFilter(e.target.value)
 	}
+	
+	const sortPigs = hogs.sort((a, b) => {
+		// if (sortFilter === "default") return hogs
+		if (sortFilter === "weight") {
+			return a.weight - b.weight
+		}
+		else if (sortFilter === "name") {
+			if (a.name < b.name) return -1;
+			return 1;
+		}
+	}) 
+	
+	const filteredPigs = sortPigs.filter(hog =>
+		(isCheck === false) ? hog : (hog.greased === true))
 
 	return (
 		<div className="navWrapper">
@@ -23,7 +37,7 @@ const Nav = ({ hogs }) => {
 				A React App for County Fair Hog Fans
 			</span>
 			<Filter onHandleCheckBox={handleCheckBox} onHandleSort={handleSort} />
-			<HogContainer hogs={hogs} isCheck={isCheck} />
+			<HogContainer hogs={filteredPigs} />
 		</div>
 	);
 };

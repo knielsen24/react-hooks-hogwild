@@ -1,16 +1,10 @@
 import React from 'react'
 import HogTile from './HogTile'
 
-function HogContainer({ hogs, isCheck }) {
+function HogContainer({ hogs }) {
 
-	
-	const filteredPigs = hogs.filter(hog => {
-		if (isCheck === false) return hogs
-		else if (isCheck === true) return (hog.greased === true)
-	})
-	
-	const renderTile = filteredPigs.map((hog) => {
-		const {name, image, weight, specialty, greased, "highest medal achieved": medal } = hog
+	const renderTile = hogs.map((hog) => {
+		const { name, image, weight, specialty, greased, "highest medal achieved": medal } = hog
 		return <HogTile
 			name={name}
 			image={image}
@@ -18,11 +12,11 @@ function HogContainer({ hogs, isCheck }) {
 			specialty={specialty}
 			greased={greased}
 			medal={medal}
-	/>
-	})  
-	
+		/>
+	})
+
 	return (
-		<div >
+		<div className='ui grid container' className='ui eight wide column'>
 			<h2 className='smallHeader'></h2>
 			{renderTile}
 		</div>
