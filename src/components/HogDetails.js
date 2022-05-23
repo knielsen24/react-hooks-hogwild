@@ -1,13 +1,12 @@
 import React from 'react'
 
-function HogDetails({ weight, specialty, greased, medal}) {
+function HogDetails({ weight, specialty, greased, medal }) {
 	return (
 		<div>
-			<ul>
-				<li>Specialty: {specialty}</li>
-				<li>Weight: {weight}</li>
-				<li>I am greased </li>
-				<li>{medal}</li>
+			<ul className='ul'>Specialty: {specialty}</ul>
+			<ul className='ul'>Weight: {weight} lbs</ul>
+			<ul className='ul'>Greased: {greased ? "YES" : "NO"}</ul>
+			<ul className='ul'>Highest Achievement: {medal[0].toUpperCase() + medal.substring(1)} Medal
 			</ul>
 		</div>
 	)
